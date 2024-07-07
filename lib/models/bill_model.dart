@@ -24,7 +24,7 @@ class Bill {
       billPerDayList: json["billPerDayList"],
       balance: json["balance"],
       income: json["income"],
-      expenses: json["expeexpensesnditure"],
+      expenses: json["expenses"],
     );
   }
 
@@ -64,38 +64,30 @@ class BillPerDay {
 }
 
 class BillItem {
-  final String icon;
   final double money;
-  final String name;
   final String desc;
   final BillType type;
-  final String? tag;
+  final int? tag;
 
   BillItem({
     required this.money,
-    required this.name,
     required this.desc,
     required this.type,
-    required this.icon,
-    this.tag
+    required this.tag
   });
 
 
   factory BillItem.fromJson(Map<String, dynamic> json) => BillItem(
       money: json["money"],
-      name: json["name"],
       desc: json["desc"],
       type: json["type"],
-      icon: json["icon"],
       tag: json["tag"]
   );
 
   Map<String, dynamic> toJson() => {
     "money": money,
-    "name": name,
     "desc": desc,
     "type": type,
-    "icon": icon,
     "tag": tag
   };
 }

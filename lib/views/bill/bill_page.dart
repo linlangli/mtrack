@@ -19,8 +19,8 @@ class BillPage extends GetView<BillController> {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<BillController>(builder: (controller) {
-      LogUtil.log('BillPage', 'GetBuilder build');
       List<BillPerDay> billPerDayList = controller.bill?.billPerDayList ?? [];
+      LogUtil.log('BillPage', 'GetBuilder build, billPerDayList: ${billPerDayList.length}');
       return Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -38,7 +38,7 @@ class BillPage extends GetView<BillController> {
               })
         ],
       );
-    });
+    }, id: AppString.billPageGetBuilderId,);
   }
 
   Widget _introWidget() {
@@ -139,7 +139,7 @@ class BillPage extends GetView<BillController> {
                 onTap: () {},
               ),
               const SizedBox(width: 18),
-              Text(billItem.name, style: ThemeFont.bodyPrimary())
+              Text(billItem.desc, style: ThemeFont.bodyPrimary())
             ],
           ),
           Text('${billItem.money}', style: ThemeFont.warmPrimary()),

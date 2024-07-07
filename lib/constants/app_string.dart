@@ -11,7 +11,8 @@ class AppString {
   static const String navigationBill = '账单';
   static const String navigationProperty = '资产';
   static const String navigationMine = '我的';
-  static const String billAdditionModalInto = '描述一下～';
+  static const String bookkeepingModalIntro = '描述一下～';
 
   static const String bookkeepingModalGetBuilderId = 'bookkeepingModal';
+  static const String billPageGetBuilderId = 'billPage';
 }

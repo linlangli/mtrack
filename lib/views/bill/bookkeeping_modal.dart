@@ -24,24 +24,40 @@ class BookkeepingModal extends GetView<BillController>{
             'assets/bookkeeping_modal_setting.svg',
             height: 24, width: 24
         ).button(
-            onTap: () {
-              LogUtil.log('tag', 'message');
-            },
-            padding: 6
+          onTap: () {
+            LogUtil.log('tag', 'message');
+          },
+          padding: 6
         ),
         GetBuilder<BillController>(builder: (controller) {
-          LogUtil.log('BookkeepingModal', 'GetBuilder build, moneyType: ${controller.bookkeepingType}');
           return Row(
+            crossAxisAlignment: CrossAxisAlignment.end,
             children: [
               Text(
                 controller.bookkeepingType == BookkeepingType.income ? '+' : '-',
                 style: ThemeFont.titlePrimary(fontSize: 24),
               ),
-              const SizedBox(width: 6,),
+              const SizedBox(width: 6),
               Text(
                 controller.money,
                 style: ThemeFont.titlePrimary(fontSize: 24),
               ),
+              const SizedBox(width: 10),
+              Row(
+                children: [
+                  SvgPicture.asset(
+                    'assets/bookkeeping_modal_date.svg',
+                    height: 14, width: 14
+                  ),
+                  const SizedBox(width: 2),
+                  Text(
+                    controller.date,
+                    style: ThemeFont.warmPrimary(),
+                  ),
+                ],
+              ).button(onTap: () {
+                // todo
+              }).paddingOnly(bottom: 6)
             ],
           );
         }, id: AppString.bookkeepingModalGetBuilderId),
@@ -50,6 +66,7 @@ class BookkeepingModal extends GetView<BillController>{
           height: 28,
           width: 28,
         ).button(onTap: () {
+          controller.bookkeeping();
           Navigator.pop(context);
         }),
       ],
@@ -76,7 +93,7 @@ class BookkeepingModal extends GetView<BillController>{
                 enabled: true,
                 style: ThemeFont.bodyPrimary(),
                 decoration: InputDecoration(
-                  hintText: AppString.billAdditionModalInto,
+                  hintText: AppString.bookkeepingModalIntro,
                   border: InputBorder.none,
                   isCollapsed: true,
                   hintStyle: ThemeFont.bodySecondary(),
