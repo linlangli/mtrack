@@ -67,7 +67,7 @@ class BillItem {
   final double money;
   final String desc;
   final BillType type;
-  final int? tag;
+  final int tag;
 
   BillItem({
     required this.money,

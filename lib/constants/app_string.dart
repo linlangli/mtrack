@@ -13,6 +13,10 @@ class AppString {
   static const String navigationMine = '我的';
   static const String bookkeepingModalIntro = '描述一下～';
 
+  static const String billTypeCatering = '餐饮';
+  static const String billTypeCloth = '服饰';
+  static const String billTypeHouse = '住房';
+
   static const String bookkeepingModalGetBuilderId = 'bookkeepingModal';
   static const String billPageGetBuilderId = 'billPage';
 }

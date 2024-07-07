@@ -1,7 +1,6 @@
 import 'package:get/get.dart';
-import 'package:mtrack/common/util/debug_util.dart';
-import 'package:mtrack/common/util/log_util.dart';
-import 'package:mtrack/common/util/time_util.dart';
+import 'package:mtrack/common/utils/debug_util.dart';
+import 'package:mtrack/common/utils/time_util.dart';
 import 'package:mtrack/constants/app_string.dart';
 import 'package:mtrack/models/bill_model.dart';
 
@@ -37,12 +36,26 @@ class BillController extends GetxController {
 
   void bookkeeping() {
     bill?.billPerDayList.forEach((billPerDay) {
-      LogUtil.log('BillController', 'billPerDay.date: ${billPerDay.date}, date: $date');
       if(billPerDay.date == date) {
-        billPerDay.billItemList.add(BillItem(money: double.parse(money), desc: desc, type: type, tag: 0xFFFFB33C));
-        LogUtil.log('BillController', 'billItemList.len: ${billPerDay.billItemList.length}');
+        billPerDay.billItemList.add(BillItem(money: double.parse(money), desc: desc, type: type, tag: 0xFFFF0000));
       }
     });
-    update();
+    update([AppString.billPageGetBuilderId, AppString.bookkeepingModalGetBuilderId]);
+  }
+
+  String getName(BillType type) {
+    String name = '';
+    switch(type) {
+      case BillType.catering:
+        name = AppString.billTypeCatering;
+        break;
+      case BillType.cloth:
+        name = AppString.billTypeCloth;
+        break;
+      case BillType.housing:
+        name = AppString.billTypeHouse;
+        break;
+    }
+    return name;
   }
 }

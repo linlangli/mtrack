@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:mtrack/common/extension/widget_extension.dart';
-import 'package:mtrack/common/util/log_util.dart';
+import 'package:mtrack/common/utils/log_util.dart';
+import 'package:mtrack/common/utils/ui_util.dart';
 import 'package:mtrack/constants/app_string.dart';
 import 'package:mtrack/constants/theme_font.dart';
 import 'package:mtrack/controllers/bill/bill_controller.dart';
@@ -31,11 +32,11 @@ class BillPage extends GetView<BillController> {
           ),
           const SizedBox(height: 32),
           ListView.builder(
-              shrinkWrap: true,
-              itemCount: billPerDayList.length,
-              itemBuilder: (BuildContext context, int index) {
-                return _perDayContentWidget(billPerDayList[index]);
-              })
+            shrinkWrap: true,
+            itemCount: billPerDayList.length,
+            itemBuilder: (BuildContext context, int index) {
+              return _perDayContentWidget(billPerDayList[index]);
+            })
         ],
       );
     }, id: AppString.billPageGetBuilderId,);
@@ -134,11 +135,17 @@ class BillPage extends GetView<BillController> {
         children: [
           Row(
             children: [
-              GestureDetector(
-                child: const Icon(size: 24, Icons.accessibility),
-                onTap: () {},
+              Container(
+                decoration: BoxDecoration(
+                  color: Color(billItem.tag),
+                  borderRadius: UiUtil.radius(6)
+                ),
+                padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 4),
+                child: Text(controller.getName(billItem.type), style: ThemeFont.warmPrimary()).button(onTap: () {
+
+                }),
               ),
-              const SizedBox(width: 18),
+              const SizedBox(width: 12),
               Text(billItem.desc, style: ThemeFont.bodyPrimary())
             ],
           ),

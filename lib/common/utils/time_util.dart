@@ -1,5 +1,4 @@
 import 'package:intl/intl.dart';
-import 'package:mtrack/common/util/log_util.dart';
 
 class TimeUtil {
   static String getNowDate({String format = 'yyyy-MM-dd'}) {
