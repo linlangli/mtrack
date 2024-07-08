@@ -29,9 +29,13 @@ class BillController extends GetxController {
     update([AppString.bookkeepingModalGetBuilderId]);
   }
 
-  void setMoneyType(BookkeepingType bookkeepingType) {
+  void seType(BookkeepingType bookkeepingType) {
     this.bookkeepingType = bookkeepingType;
     update([AppString.bookkeepingModalGetBuilderId]);
+  }
+
+  void setDesc(String desc) {
+    this.desc = desc;
   }
 
   void bookkeeping() {

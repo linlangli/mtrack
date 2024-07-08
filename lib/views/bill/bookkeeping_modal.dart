@@ -99,7 +99,12 @@ class BookkeepingModal extends GetView<BillController>{
                   hintStyle: ThemeFont.bodySecondary(),
                   contentPadding: const EdgeInsets.only(left: 6, bottom: 2)
                 ),
-                onEditingComplete: () {},
+                onChanged: (String desc) {
+                  controller.setDesc(desc);
+                },
+                onEditingComplete: () {
+                  LogUtil.log('BookkeepingModal', 'onEditingComplete');
+                },
               ),
             ),
             // Text('data'),
@@ -125,7 +130,7 @@ class BookkeepingModal extends GetView<BillController>{
       )
     )).button(onTap: () {
       if (text == '') {
-        controller.setMoneyType(BookkeepingType.expenses);
+        controller.seType(BookkeepingType.expenses);
         controller.setMoney('0.0');
       }
       controller.setMoney('${controller.money}$text');
@@ -191,14 +196,14 @@ class BookkeepingModal extends GetView<BillController>{
             height: 28,
             width: 28,
           ).button(onTap: () {
-            controller.bookkeepingType == BookkeepingType.expenses ? controller.setMoneyType(BookkeepingType.income) : controller.setMoneyType(BookkeepingType.expenses);
+            controller.bookkeepingType == BookkeepingType.expenses ? controller.seType(BookkeepingType.income) : controller.seType(BookkeepingType.expenses);
           });
         }, id: AppString.bookkeepingModalGetBuilderId),
         SvgPicture.asset(
             'assets/bookkeeping_modal_reset.svg',
             height: 24, width: 24
         ).button(onTap: () {
-          controller.setMoneyType(BookkeepingType.expenses);
+          controller.seType(BookkeepingType.expenses);
           controller.setMoney('0.0');
         }),
         SvgPicture.asset(
