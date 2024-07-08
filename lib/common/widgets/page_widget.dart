@@ -15,6 +15,7 @@ class PageWidget extends StatelessWidget {
     this.safeArea = true,
     this.pageState = PageState.content,
     this.resizeToAvoidBottomInset = false,
+    this.backgroundColor,
     this.padding
   });
 
@@ -23,6 +24,7 @@ class PageWidget extends StatelessWidget {
   final PageState pageState;
   final bool resizeToAvoidBottomInset;
   final EdgeInsetsGeometry? padding;
+  final Color? backgroundColor;
 
   @override
   Widget build(BuildContext context) {
@@ -62,6 +64,7 @@ class PageWidget extends StatelessWidget {
       content = Padding(padding: padding ?? EdgeInsets.zero, child: content);
     }
     Widget widget = Scaffold(
+      backgroundColor: backgroundColor,
       resizeToAvoidBottomInset: resizeToAvoidBottomInset,
       body: content,
     );

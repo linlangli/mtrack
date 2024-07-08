@@ -9,12 +9,13 @@ import 'package:mtrack/constants/app_string.dart';
 import 'package:mtrack/constants/theme_color.dart';
 import 'package:mtrack/constants/theme_font.dart';
 import 'package:mtrack/controllers/bill/bill_controller.dart';
+import 'package:mtrack/views/bill/tag_modal.dart';
 
 class BookkeepingModal extends GetView<BillController>{
   BookkeepingModal({super.key});
 
   @override
-  BillController controller = Get.find<BillController>();
+  final BillController controller = Get.find<BillController>();
 
   Widget topWidget(BuildContext context) {
     return Row(
@@ -190,15 +191,13 @@ class BookkeepingModal extends GetView<BillController>{
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
-        GetBuilder<BillController>(builder: (controller) {
-          return SvgPicture.asset(
-            controller.bookkeepingType == BookkeepingType.expenses ? 'assets/bookkeeping_modal_expenses.svg' : 'assets/bookkeeping_modal_income.svg',
-            height: 28,
-            width: 28,
-          ).button(onTap: () {
-            controller.bookkeepingType == BookkeepingType.expenses ? controller.seType(BookkeepingType.income) : controller.seType(BookkeepingType.expenses);
-          });
-        }, id: AppString.bookkeepingModalGetBuilderId),
+        SvgPicture.asset(
+          controller.bookkeepingType == BookkeepingType.expenses ? 'assets/bookkeeping_modal_expenses.svg' : 'assets/bookkeeping_modal_income.svg',
+          height: 28,
+          width: 28,
+        ).button(onTap: () {
+          controller.bookkeepingType == BookkeepingType.expenses ? controller.seType(BookkeepingType.income) : controller.seType(BookkeepingType.expenses);
+        }),
         SvgPicture.asset(
             'assets/bookkeeping_modal_reset.svg',
             height: 24, width: 24
@@ -216,8 +215,12 @@ class BookkeepingModal extends GetView<BillController>{
         Container(
           width: 24,
           height: 24,
-          decoration: BoxDecoration(borderRadius: UiUtil.radius(12), color: Colors.amber),
-        ).button(onTap: () {})
+          decoration: BoxDecoration(borderRadius: UiUtil.radius(8), color: controller.tag),
+        ).button(onTap: () {
+          showDialog(context: context, builder: (BuildContext context) {
+            return TagModal();
+          }, barrierColor: Colors.transparent);
+        })
       ],
     );
   }
@@ -240,7 +243,12 @@ class BookkeepingModal extends GetView<BillController>{
           Flexible(flex: 10,child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              Flexible(flex: 2, child: functionWidget(context)),
+              Flexible(
+                flex: 2,
+                child: GetBuilder<BillController>(builder: (controller) {
+                  return functionWidget(context);
+                }, id: AppString.bookkeepingModalGetBuilderId),
+              ),
               Flexible(flex: 6, child: numberWidget()),
             ],
           )),

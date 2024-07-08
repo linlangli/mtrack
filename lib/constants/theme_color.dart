@@ -11,5 +11,5 @@ class ThemeColor {
 
   static const Color onPrimaryContainer = Color(0xFFFFFFFF);
   static const Color onSecondaryContainer = Color(0xFF000000);
-  static const Color onThirdlyContainer = Color(0x00e87a66);
+  static const Color onThirdlyContainer = Color(0xFFDAD8D7);
 }

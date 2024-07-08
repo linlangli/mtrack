@@ -141,7 +141,7 @@ class BillPage extends GetView<BillController> {
                   borderRadius: UiUtil.radius(6)
                 ),
                 padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 4),
-                child: Text(controller.getName(billItem.type), style: ThemeFont.warmPrimary()).button(onTap: () {
+                child: Text(controller.getType(billItem.type), style: ThemeFont.warmPrimary()).button(onTap: () {
 
                 }),
               ),

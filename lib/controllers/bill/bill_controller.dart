@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mtrack/common/utils/debug_util.dart';
 import 'package:mtrack/common/utils/time_util.dart';
@@ -16,7 +17,8 @@ class BillController extends GetxController {
   BillType type = BillType.cloth;
   String date = TimeUtil.getNowDate();
   String desc = '';
-  String tag = '';
+  List<Color> tagList = [Colors.red, Colors.lightGreen, Colors.green, Colors.blue, Colors.lightBlue, Colors.yellow, Colors.orange, Colors.pink, Colors.grey];
+  Color tag = Colors.orange;
 
 
   void loadBillList() {
@@ -26,6 +28,11 @@ class BillController extends GetxController {
 
   void setMoney(String money) {
     this.money = money;
+    update([AppString.bookkeepingModalGetBuilderId]);
+  }
+
+  void setTag(Color tag) {
+    this.tag = tag;
     update([AppString.bookkeepingModalGetBuilderId]);
   }
 
@@ -41,13 +48,13 @@ class BillController extends GetxController {
   void bookkeeping() {
     bill?.billPerDayList.forEach((billPerDay) {
       if(billPerDay.date == date) {
-        billPerDay.billItemList.add(BillItem(money: double.parse(money), desc: desc, type: type, tag: 0xFFFF0000));
+        billPerDay.billItemList.add(BillItem(money: double.parse(money), desc: desc, type: type, tag: tag.value));
       }
     });
     update([AppString.billPageGetBuilderId, AppString.bookkeepingModalGetBuilderId]);
   }
 
-  String getName(BillType type) {
+  String getType(BillType type) {
     String name = '';
     switch(type) {
       case BillType.catering:
