@@ -27,7 +27,22 @@ class BillController extends GetxController {
   }
 
   void setMoney(String money) {
-    this.money = money;
+    if(this.money == '0.0' || money == '0.0') {
+      this.money = money;
+    } else {
+      this.money = '${this.money}$money';
+    }
+    update([AppString.bookkeepingModalGetBuilderId]);
+  }
+
+  void backMoney() {
+    if(money == '0.0') {
+      return;
+    }
+    money = money.substring(0, money.length - 1);
+    if(money == '') {
+      money = '0.0';
+    }
     update([AppString.bookkeepingModalGetBuilderId]);
   }
 
@@ -68,5 +83,15 @@ class BillController extends GetxController {
         break;
     }
     return name;
+  }
+
+  void reset() {
+    desc = '';
+    date = TimeUtil.getNowDate();
+    tag = Colors.orange;
+    type = BillType.cloth;
+    money = '0.0';
+    bookkeepingType = BookkeepingType.expenses;
+    update([AppString.bookkeepingModalGetBuilderId]);
   }
 }

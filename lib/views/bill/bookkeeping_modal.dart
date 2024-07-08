@@ -22,11 +22,12 @@ class BookkeepingModal extends GetView<BillController>{
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         SvgPicture.asset(
-            'assets/bookkeeping_modal_setting.svg',
-            height: 24, width: 24
+            'assets/bookkeeping_modal_close.svg',
+            height: 28, width: 28
         ).button(
           onTap: () {
-            LogUtil.log('tag', 'message');
+            Navigator.pop(context);
+            controller.reset();
           },
           padding: 6
         ),
@@ -126,15 +127,18 @@ class BookkeepingModal extends GetView<BillController>{
       width: 54,
       height: 54,
       child: (text != '' ? Text(text, style: ThemeFont.titleSecondary()) : SvgPicture.asset(
-          'assets/bookkeeping_modal_back.svg',
-          height: 24, width: 24
-      )
+        'assets/bookkeeping_modal_back.svg',
+        height: 24, width: 24
+      ).button(onTap: () {
+        String money = controller.money;
+        controller.backMoney();
+      })
     )).button(onTap: () {
       if (text == '') {
         controller.seType(BookkeepingType.expenses);
         controller.setMoney('0.0');
       }
-      controller.setMoney('${controller.money}$text');
+      controller.setMoney(text);
     });
   }
 
@@ -231,10 +235,10 @@ class BookkeepingModal extends GetView<BillController>{
       padding: const EdgeInsets.only(bottom: 12),
       height: 380,
       decoration: const BoxDecoration(
-          color: ThemeColor.secondary,
-          borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(24), topRight: Radius.circular(24)
-          )
+        color: ThemeColor.secondary,
+        borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(24), topRight: Radius.circular(24)
+        )
       ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,

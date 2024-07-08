@@ -36,7 +36,7 @@ class _BarWidgetState extends State<BarWidget> {
   Widget build(BuildContext context) {
     return Container(
       padding: widget.padding ??
-          const EdgeInsets.symmetric(vertical: 6, horizontal: 16),
+        const EdgeInsets.symmetric(vertical: 6, horizontal: 16),
       child: Row(
         children: [
           GestureDetector(
