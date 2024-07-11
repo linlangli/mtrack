@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:hive/hive.dart';
 import 'package:mtrack/common/utils/debug_util.dart';
+import 'package:mtrack/common/utils/log_util.dart';
 import 'package:mtrack/common/utils/time_util.dart';
 import 'package:mtrack/constants/app_string.dart';
 import 'package:mtrack/models/bill_model.dart';
@@ -61,9 +63,13 @@ class BillController extends GetxController {
   }
 
   void bookkeeping() {
+    final doubleMoney = bookkeepingType == BookkeepingType.expenses ? '-$money' : '+$money';
+    LogUtil.log('BillController', 'doubleMoney: $doubleMoney');
     bill?.billPerDayList.forEach((billPerDay) {
       if(billPerDay.date == date) {
-        billPerDay.billItemList.add(BillItem(money: double.parse(money), desc: desc, type: type, tag: tag.value));
+        billPerDay.billItemList.add(
+          BillItem(money: double.parse(doubleMoney), desc: desc, type: type, tag: tag.value)
+        );
       }
     });
     update([AppString.billPageGetBuilderId, AppString.bookkeepingModalGetBuilderId]);

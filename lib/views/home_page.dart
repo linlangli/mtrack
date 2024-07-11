@@ -36,20 +36,34 @@ class _HomePageState extends State<HomePage> {
       alignment: Alignment.bottomRight,
       children: [
         PageWidget(
-            child: Column(
-          children: [
-            BarWidget(),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 18),
-              child: child,
-            ),
-            const Spacer(),
-            _renderNavigationWidget(),
-            const SizedBox(
-              height: 12,
-            )
-          ],
-        )),
+          child: Stack(
+            children: [
+              navigationIndexSelected == NavigationIndex.bill ? Positioned(
+                right: 32,
+                bottom: 100,
+                child: SvgPicture.asset(
+                  'assets/app_logo.svg',
+                  height: 120,
+                  width: 120,
+                ),
+              ) : const SizedBox(),
+              Column(
+                children: [
+                  BarWidget(),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 18),
+                    child: child,
+                  ),
+                  const Spacer(),
+                  _renderNavigationWidget(),
+                  const SizedBox(
+                    height: 12,
+                  )
+                ],
+              ),
+            ],
+          )
+        ),
       ],
     );
   }

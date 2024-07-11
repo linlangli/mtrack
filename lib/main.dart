@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:mtrack/constants/routers.dart';
 import 'package:mtrack/constants/theme_color.dart';
-import 'package:mtrack/views/bill/bill_page.dart';
 import 'package:mtrack/views/home_page.dart';
 
-void main() {
+void main() async {
+  await Hive.initFlutter();
   runApp(const MyApp());
 }
 
@@ -23,7 +24,7 @@ class MyApp extends StatelessWidget {
         getPages: [
           GetPage(name: Routers.homePage, page: () => const HomePage()),
         ],
-        home: HomePage()
+        home: const HomePage()
     );
   }
 }
